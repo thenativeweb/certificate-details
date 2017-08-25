@@ -1,0 +1,35 @@
+{
+  "name": "certificate-details",
+  "version": "0.0.0",
+  "description": "certificate-details gets the details from an SSL certificate.",
+  "contributors": [
+    {
+      "name": "Golo Roden",
+      "email": "golo.roden@thenativeweb.io"
+    },
+    {
+      "name": "Michael Scherer",
+      "email": "mail@michael-scherer.net"
+    }
+  ],
+  "main": "dist/certificateDetails.js",
+  "dependencies": {
+    "freeport": "1.0.5"
+  },
+  "devDependencies": {
+    "assertthat": "0.10.3",
+    "roboter": "0.15.4",
+    "roboter-server": "0.15.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thenativeweb/certificate-details.git"
+  },
+  "keywords": [
+    "certificate",
+    "ssl",
+    "tls",
+    "x509"
+  ],
+  "license": "MIT"
+}

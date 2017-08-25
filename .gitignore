@@ -1,0 +1,13 @@
+# Node.js folders
+*coverage/
+*node_modules/
+
+# Temporary files
+*.swp
+
+# Build artefacts
+*build/
+
+# OS generated files and folders
+.DS_Store
+npm-debug.log
