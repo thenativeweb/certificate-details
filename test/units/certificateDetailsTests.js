@@ -59,8 +59,12 @@ suite('certificateDetails', () => {
           commonName: 'localhost',
           email: 'hello@thenativeweb.io'
         });
-        assert.that(details.validFrom).is.equalTo(new Date(2015, 4, 20, 19, 20, 50));
-        assert.that(details.validTo).is.equalTo(new Date(2025, 4, 17, 19, 20, 50));
+        assert.that(details.metadata).is.equalTo({
+          validFrom: new Date(2015, 4, 20, 19, 20, 50),
+          validTo: new Date(2025, 4, 17, 19, 20, 50),
+          fingerprint: '75:93:1A:84:70:72:6C:B8:6A:38:87:4B:64:75:A9:C0:10:29:1C:18',
+          serialNumber: 'DD08916E9287D8D8'
+        });
         done();
       });
     });
