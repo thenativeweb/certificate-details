@@ -42,7 +42,7 @@ var certificateDetails = {
 
           server.close();
 
-          callback(null, {
+          var result = {
             subject: {
               country: details.subject.C,
               state: details.subject.ST,
@@ -65,7 +65,13 @@ var certificateDetails = {
               fingerprint: details.fingerprint,
               serialNumber: details.serialNumber
             }
-          });
+          };
+
+          if (details.subjectaltname) {
+            result.subject.alternativeNames = [details.subjectaltname.substring(details.subjectaltname.indexOf(':') + 1)];
+          }
+
+          callback(null, result);
         });
 
         socket.end('');
