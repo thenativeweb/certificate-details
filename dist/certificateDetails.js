@@ -32,12 +32,27 @@ var certificateDetails = {
         return callback(err);
       }
 
-      var server = tls.createServer({ key: key, cert: cert }, function (socket) {
-        socket.end('');
+      var server = void 0,
+          socket = void 0;
+
+      var handleError = function handleError(errServerOrSocket) {
+        server.removeListener('error', handleError);
+
+        if (socket) {
+          socket.removeListener('error', handleError);
+        }
+
+        callback(errServerOrSocket);
+      };
+
+      server = tls.createServer({ key: key, cert: cert }, function () {
+        // Intentionally left blank.
       });
 
+      server.on('error', handleError);
+
       server.listen(port, function () {
-        var socket = tls.connect({ port: port, rejectUnauthorized: false }, function () {
+        socket = tls.connect({ port: port, rejectUnauthorized: false }, function () {
           var details = socket.getPeerCertificate();
 
           server.close();
@@ -71,9 +86,13 @@ var certificateDetails = {
             result.subject.alternativeNames = [details.subjectaltname.substring(details.subjectaltname.indexOf(':') + 1)];
           }
 
+          server.removeListener('error', handleError);
+          socket.removeListener('error', handleError);
+
           callback(null, result);
         });
 
+        socket.on('error', handleError);
         socket.end('');
       });
     });
