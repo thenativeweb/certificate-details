@@ -4,7 +4,7 @@ const path = require('path');
 
 const assert = require('assertthat');
 
-const certificateDetails = require('../../lib/certificateDetails');
+const certificateDetails = require('../../src/certificateDetails');
 
 suite('certificateDetails', () => {
   test('is an object.', done => {
@@ -33,14 +33,14 @@ suite('certificateDetails', () => {
     });
 
     test('returns an error if private key and / or certificate are missing.', done => {
-      certificateDetails.get(path.join(__dirname, '..', 'keys', 'none'), err => {
+      certificateDetails.get(path.join(__dirname, '..', 'shared', 'keys', 'none'), err => {
         assert.that(err).is.not.null();
         done();
       });
     });
 
     test('returns the certificate details.', done => {
-      certificateDetails.get(path.join(__dirname, '..', 'keys', 'localhost'), (err, details) => {
+      certificateDetails.get(path.join(__dirname, '..', 'shared', 'keys', 'localhost'), (err, details) => {
         assert.that(err).is.null();
         assert.that(details).is.ofType('object');
         assert.that(details.subject).is.equalTo({
@@ -70,7 +70,7 @@ suite('certificateDetails', () => {
     });
 
     test('returns the certificate details with SANs.', done => {
-      certificateDetails.get(path.join(__dirname, '..', 'keys', 'localhost-with-san'), (err, details) => {
+      certificateDetails.get(path.join(__dirname, '..', 'shared', 'keys', 'localhost-with-san'), (err, details) => {
         assert.that(err).is.null();
         assert.that(details).is.ofType('object');
         assert.that(details.subject).is.equalTo({
